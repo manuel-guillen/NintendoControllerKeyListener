@@ -16,19 +16,23 @@ import org.jnativehook.keyboard.NativeKeyListener;
 public class ControllerListener extends JFrame implements NativeKeyListener {
            
     private JPanel contentPane;
-    private BufferedImage controller;
-    private BufferedImage bluePress, redPress, greenPress, yellowPress, cyanPress, cyanPress2;
+    private BufferedImage overlay;
+    private BufferedImage pressA, pressB, pressX, pressY, pressSTART, pressSELECT, pressLEFT, pressRIGHT, pressUP, pressDOWN;
     
-    private boolean drawX, drawY, drawA, drawB, drawSTART, drawSELECT;
+    private boolean drawA, drawB, drawX, drawY, drawSTART, drawSELECT, drawLEFT, drawRIGHT, drawUP, drawDOWN;
     
     public ControllerListener() throws IOException {
-        controller = ImageIO.read(new File("resources/overlay.png"));
-        bluePress = ImageIO.read(new File("resources/blue.png"));
-        redPress = ImageIO.read(new File("resources/red.png"));
-        greenPress = ImageIO.read(new File("resources/green.png"));
-        yellowPress = ImageIO.read(new File("resources/yellow.png"));
-        cyanPress = ImageIO.read(new File("resources/cyan.png"));
-        cyanPress2 = ImageIO.read(new File("resources/cyan2.png"));
+        overlay = ImageIO.read(new File("resources/overlay.png"));
+        pressA = ImageIO.read(new File("resources/A.png"));
+        pressB = ImageIO.read(new File("resources/B.png"));
+        pressX = ImageIO.read(new File("resources/X.png"));
+        pressY = ImageIO.read(new File("resources/Y.png"));
+        pressSTART = ImageIO.read(new File("resources/START.png"));
+        pressSELECT = ImageIO.read(new File("resources/SELECT.png"));
+        pressLEFT = ImageIO.read(new File("resources/LEFT.png"));
+        pressRIGHT = ImageIO.read(new File("resources/RIGHT.png"));
+        pressUP = ImageIO.read(new File("resources/UP.png"));
+        pressDOWN = ImageIO.read(new File("resources/DOWN.png"));
         
         setTitle("Nintendo Controller KeyListener");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -43,18 +47,22 @@ public class ControllerListener extends JFrame implements NativeKeyListener {
             public void paintComponent(Graphics o) {
                 super.paintComponent(o);
                 Graphics2D g = (Graphics2D) o;
-                g.drawImage(controller, 0, 0, this.getWidth(), this.getHeight(), null);
+                g.drawImage(overlay, 0, 0, this.getWidth(), this.getHeight(), null);
                 
-                if(drawA)       g.drawImage(redPress, 511, 76, redPress.getWidth(), redPress.getHeight(), null);
-                if(drawB)       g.drawImage(yellowPress, 486, 100, yellowPress.getWidth(), yellowPress.getHeight(), null);
-                if(drawX)       g.drawImage(bluePress, 486, 49, bluePress.getWidth(), bluePress.getHeight(), null);
-                if(drawY)       g.drawImage(greenPress, 460, 76, greenPress.getWidth(), greenPress.getHeight(), null);
-                if(drawSTART)   g.drawImage(cyanPress, 460, 173, cyanPress.getWidth(), cyanPress.getWidth(), null);
-                if(drawSELECT)  g.drawImage(cyanPress2, 460, 205, cyanPress2.getWidth(), cyanPress2.getWidth(), null);
+                if(drawA)       g.drawImage(pressA, 511, 76, pressA.getWidth(), pressA.getHeight(), null);
+                if(drawB)       g.drawImage(pressB, 486, 100, pressB.getWidth(), pressB.getHeight(), null);
+                if(drawX)       g.drawImage(pressX, 486, 49, pressX.getWidth(), pressX.getHeight(), null);
+                if(drawY)       g.drawImage(pressY, 460, 76, pressY.getWidth(), pressY.getHeight(), null);
+                if(drawSTART)   g.drawImage(pressSTART, 460, 173, pressSTART.getWidth(), pressSTART.getWidth(), null);
+                if(drawSELECT)  g.drawImage(pressSELECT, 460, 205, pressSELECT.getWidth(), pressSELECT.getWidth(), null);
+                if(drawLEFT)    g.drawImage(pressLEFT, 30, 140, pressLEFT.getWidth(), pressLEFT.getHeight(), null);
+                if(drawRIGHT)   g.drawImage(pressRIGHT, 67, 140, pressRIGHT.getWidth(), pressRIGHT.getHeight(), null);
+                if(drawUP)		g.drawImage(pressUP, 49, 121, pressUP.getWidth(), pressUP.getHeight(), null);
+                if(drawDOWN)    g.drawImage(pressDOWN, 49, 158, pressDOWN.getWidth(), pressDOWN.getHeight(), null);
             }
         };
         
-        contentPane.setPreferredSize(new Dimension(controller.getWidth(), controller.getHeight()));
+        contentPane.setPreferredSize(new Dimension(overlay.getWidth(), overlay.getHeight()));
         setContentPane(contentPane);
         pack();
         setResizable(false);
@@ -70,6 +78,10 @@ public class ControllerListener extends JFrame implements NativeKeyListener {
         case NativeKeyEvent.VC_Y:           drawY = true;       break;
         case NativeKeyEvent.VC_ENTER:       drawSTART = true;   break;
         case NativeKeyEvent.VC_BACKSPACE:   drawSELECT = true;  break;
+        case NativeKeyEvent.VC_LEFT:        drawLEFT = true;    break;
+        case NativeKeyEvent.VC_RIGHT:       drawRIGHT = true;   break;
+        case NativeKeyEvent.VC_UP:       	drawUP = true;   	break;
+        case NativeKeyEvent.VC_DOWN:        drawDOWN = true;    break;
         }
         contentPane.repaint();
     }
@@ -83,6 +95,10 @@ public class ControllerListener extends JFrame implements NativeKeyListener {
         case NativeKeyEvent.VC_Y:           drawY = false;       break;
         case NativeKeyEvent.VC_ENTER:       drawSTART = false;   break;
         case NativeKeyEvent.VC_BACKSPACE:   drawSELECT = false;  break;
+        case NativeKeyEvent.VC_LEFT:        drawLEFT = false;    break;
+        case NativeKeyEvent.VC_RIGHT:       drawRIGHT = false;   break;
+        case NativeKeyEvent.VC_UP:       	drawUP = false;   	 break;
+        case NativeKeyEvent.VC_DOWN:        drawDOWN = false;    break;
         }
         contentPane.repaint();
     }
