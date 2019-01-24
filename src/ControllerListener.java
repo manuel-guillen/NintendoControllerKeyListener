@@ -49,16 +49,16 @@ public class ControllerListener extends JFrame implements NativeKeyListener {
                 Graphics2D g = (Graphics2D) o;
                 g.drawImage(overlay, 0, 0, this.getWidth(), this.getHeight(), null);
                 
-                if(drawA)       g.drawImage(pressA, 511, 76, pressA.getWidth(), pressA.getHeight(), null);
-                if(drawB)       g.drawImage(pressB, 486, 100, pressB.getWidth(), pressB.getHeight(), null);
-                if(drawX)       g.drawImage(pressX, 486, 49, pressX.getWidth(), pressX.getHeight(), null);
-                if(drawY)       g.drawImage(pressY, 460, 76, pressY.getWidth(), pressY.getHeight(), null);
-                if(drawSTART)   g.drawImage(pressSTART, 460, 173, pressSTART.getWidth(), pressSTART.getWidth(), null);
-                if(drawSELECT)  g.drawImage(pressSELECT, 460, 205, pressSELECT.getWidth(), pressSELECT.getWidth(), null);
-                if(drawLEFT)    g.drawImage(pressLEFT, 30, 140, pressLEFT.getWidth(), pressLEFT.getHeight(), null);
-                if(drawRIGHT)   g.drawImage(pressRIGHT, 67, 140, pressRIGHT.getWidth(), pressRIGHT.getHeight(), null);
-                if(drawUP)		g.drawImage(pressUP, 49, 121, pressUP.getWidth(), pressUP.getHeight(), null);
-                if(drawDOWN)    g.drawImage(pressDOWN, 49, 158, pressDOWN.getWidth(), pressDOWN.getHeight(), null);
+                if(drawA)       g.drawImage(pressA, 511, 129, pressA.getWidth(), pressA.getHeight(), null);
+                if(drawB)       g.drawImage(pressB, 486, 153, pressB.getWidth(), pressB.getHeight(), null);
+                if(drawX)       g.drawImage(pressX, 486, 102, pressX.getWidth(), pressX.getHeight(), null);
+                if(drawY)       g.drawImage(pressY, 460, 129, pressY.getWidth(), pressY.getHeight(), null);
+                if(drawSTART)   g.drawImage(pressSTART, 460, 226, pressSTART.getWidth(), pressSTART.getWidth(), null);
+                if(drawSELECT)  g.drawImage(pressSELECT, 460, 258, pressSELECT.getWidth(), pressSELECT.getWidth(), null);
+                if(drawLEFT)    g.drawImage(pressLEFT, 30, 193, pressLEFT.getWidth(), pressLEFT.getHeight(), null);
+                if(drawRIGHT)   g.drawImage(pressRIGHT, 67, 193, pressRIGHT.getWidth(), pressRIGHT.getHeight(), null);
+                if(drawUP)		g.drawImage(pressUP, 49, 174, pressUP.getWidth(), pressUP.getHeight(), null);
+                if(drawDOWN)    g.drawImage(pressDOWN, 49, 211, pressDOWN.getWidth(), pressDOWN.getHeight(), null);
             }
         };
         
