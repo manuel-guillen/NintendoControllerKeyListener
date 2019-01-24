@@ -20,6 +20,20 @@ public class ControllerListener extends JFrame implements NativeKeyListener {
     private BufferedImage pressA, pressB, pressX, pressY, pressSTART, pressSELECT, pressLEFT, pressRIGHT, pressUP, pressDOWN, pressL, pressR, pressZL, pressZR;
     
     private boolean drawA, drawB, drawX, drawY, drawSTART, drawSELECT, drawLEFT, drawRIGHT, drawUP, drawDOWN, drawL, drawR, drawZL, drawZR;
+    private int keyA = NativeKeyEvent.VC_A, 
+                keyB = NativeKeyEvent.VC_B,
+                keyX = NativeKeyEvent.VC_X,
+                keyY = NativeKeyEvent.VC_Y,
+                keySTART = NativeKeyEvent.VC_ENTER,
+                keySELECT = NativeKeyEvent.VC_BACKSPACE,
+                keyLEFT = NativeKeyEvent.VC_LEFT,
+                keyRIGHT = NativeKeyEvent.VC_RIGHT,
+                keyUP = NativeKeyEvent.VC_UP,
+                keyDOWN = NativeKeyEvent.VC_DOWN,
+                keyL = NativeKeyEvent.VC_L,
+                keyR = NativeKeyEvent.VC_R,
+                keyZL = NativeKeyEvent.VC_Q,
+                keyZR = NativeKeyEvent.VC_W;
     
     public ControllerListener() throws IOException {
         overlay = ImageIO.read(new File("resources/overlay.png"));
@@ -77,46 +91,32 @@ public class ControllerListener extends JFrame implements NativeKeyListener {
         setVisible(true);
     }
 
-    @Override
-    public void nativeKeyPressed(NativeKeyEvent e) {
-        switch(e.getKeyCode()) {
-        case NativeKeyEvent.VC_A:           drawA = true;       break;
-        case NativeKeyEvent.VC_B:           drawB = true;       break;
-        case NativeKeyEvent.VC_X:           drawX = true;       break;
-        case NativeKeyEvent.VC_Y:           drawY = true;       break;
-        case NativeKeyEvent.VC_ENTER:       drawSTART = true;   break;
-        case NativeKeyEvent.VC_BACKSPACE:   drawSELECT = true;  break;
-        case NativeKeyEvent.VC_LEFT:        drawLEFT = true;    break;
-        case NativeKeyEvent.VC_RIGHT:       drawRIGHT = true;   break;
-        case NativeKeyEvent.VC_UP:       	drawUP = true;   	break;
-        case NativeKeyEvent.VC_DOWN:        drawDOWN = true;    break;
-        case NativeKeyEvent.VC_L:           drawL = true;       break;
-        case NativeKeyEvent.VC_R:           drawR = true;       break;
-        case NativeKeyEvent.VC_Q:           drawZL = true;      break;
-        case NativeKeyEvent.VC_W:           drawZR = true;      break;
-        }
+    private void keyRespond(int keyCode, boolean keyHeld) {
+        if (keyCode == keyA)             drawA = keyHeld;
+        else if (keyCode == keyB)        drawB = keyHeld;
+        else if (keyCode == keyX)        drawX = keyHeld;
+        else if (keyCode == keyY)        drawY = keyHeld;
+        else if (keyCode == keySTART)    drawSTART = keyHeld;
+        else if (keyCode == keySELECT)   drawSELECT = keyHeld;
+        else if (keyCode == keyLEFT)     drawLEFT = keyHeld;
+        else if (keyCode == keyRIGHT)    drawRIGHT = keyHeld;
+        else if (keyCode == keyUP)       drawUP = keyHeld;
+        else if (keyCode == keyDOWN)     drawDOWN = keyHeld; 
+        else if (keyCode == keyL)        drawL = keyHeld;
+        else if (keyCode == keyR)        drawR = keyHeld;
+        else if (keyCode == keyZL)       drawZL = keyHeld;
+        else if (keyCode == keyZR)       drawZR = keyHeld;
         contentPane.repaint();
     }
 
     @Override
+    public void nativeKeyPressed(NativeKeyEvent e) {
+        keyRespond(e.getKeyCode(), true);
+    }
+
+    @Override
     public void nativeKeyReleased(NativeKeyEvent e) {
-        switch(e.getKeyCode()) {
-        case NativeKeyEvent.VC_A:           drawA = false;       break;
-        case NativeKeyEvent.VC_B:           drawB = false;       break;
-        case NativeKeyEvent.VC_X:           drawX = false;       break;
-        case NativeKeyEvent.VC_Y:           drawY = false;       break;
-        case NativeKeyEvent.VC_ENTER:       drawSTART = false;   break;
-        case NativeKeyEvent.VC_BACKSPACE:   drawSELECT = false;  break;
-        case NativeKeyEvent.VC_LEFT:        drawLEFT = false;    break;
-        case NativeKeyEvent.VC_RIGHT:       drawRIGHT = false;   break;
-        case NativeKeyEvent.VC_UP:       	drawUP = false;   	 break;
-        case NativeKeyEvent.VC_DOWN:        drawDOWN = false;    break;
-        case NativeKeyEvent.VC_L:           drawL = false;       break;
-        case NativeKeyEvent.VC_R:           drawR = false;       break;
-        case NativeKeyEvent.VC_Q:           drawZL = false;      break;
-        case NativeKeyEvent.VC_W:           drawZR = false;      break;
-        }
-        contentPane.repaint();
+        keyRespond(e.getKeyCode(), false);
     }
 
     @Override
