@@ -13,6 +13,7 @@ import org.jnativehook.keyboard.NativeKeyEvent;
 import org.jnativehook.keyboard.NativeKeyListener;
 
 import joystick.JoystickListener;
+import net.java.games.input.Component;
 import net.java.games.input.Event;
 
 @SuppressWarnings("serial")
@@ -21,8 +22,10 @@ public class VisualController extends JFrame implements NativeKeyListener, Joyst
     private JPanel contentPane;
     private BufferedImage overlay;
     private BufferedImage pressA, pressB, pressX, pressY, pressSTART, pressSELECT, pressLEFT, pressRIGHT, pressUP, pressDOWN, pressL, pressR, pressZL, pressZR;
+    private BufferedImage circlePad;
     
     private boolean drawA, drawB, drawX, drawY, drawSTART, drawSELECT, drawLEFT, drawRIGHT, drawUP, drawDOWN, drawL, drawR, drawZL, drawZR;
+    private double axisX, axisY;
     private int keyA = NativeKeyEvent.VC_A, 
                 keyB = NativeKeyEvent.VC_B,
                 keyX = NativeKeyEvent.VC_X,
@@ -54,6 +57,7 @@ public class VisualController extends JFrame implements NativeKeyListener, Joyst
         pressR = ImageIO.read(new File("resources/R.png"));
         pressZL = ImageIO.read(new File("resources/ZL.png"));
         pressZR = ImageIO.read(new File("resources/ZR.png"));
+        circlePad = ImageIO.read(new File("resources/CIRCLE_PAD.png"));
         
         setTitle("Nintendo Controller KeyListener");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -84,6 +88,7 @@ public class VisualController extends JFrame implements NativeKeyListener, Joyst
                 if(drawR)		g.drawImage(pressR, 478, 8, pressR.getWidth(), pressR.getHeight(), null);
                 if(drawZL)		g.drawImage(pressZL, 94, 20, pressZL.getWidth(), pressZL.getHeight(), null);
                 if(drawZR)		g.drawImage(pressZR, 428, 20, pressZR.getWidth(), pressZR.getHeight(), null);
+                g.drawImage(circlePad, (int)(30+8*axisX), (int)(84+6*axisY), circlePad.getWidth(), circlePad.getHeight(), null);
             }
         };
         
@@ -127,7 +132,9 @@ public class VisualController extends JFrame implements NativeKeyListener, Joyst
 
     @Override
     public void joystickMoved(Event e) {
-        System.out.println(e.getValue());        
+        if (e.getComponent().getIdentifier().equals(Component.Identifier.Axis.X)) axisX = e.getValue();
+        else if (e.getComponent().getIdentifier().equals(Component.Identifier.Axis.Y)) axisY = e.getValue();
+        contentPane.repaint();
     }
 
 }

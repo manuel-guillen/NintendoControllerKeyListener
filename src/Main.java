@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import org.jnativehook.GlobalScreen;
 import org.jnativehook.NativeHookException;
+import org.jnativehook.dispatcher.SwingDispatchService;
 
 import joystick.NintendoJoystickEventDispatcher;
 
@@ -11,7 +12,7 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         setGlobalScreenLogger(false);
-        
+        GlobalScreen.setEventDispatcher(new SwingDispatchService());
         try {
             GlobalScreen.registerNativeHook();
         } catch (NativeHookException ex) {
