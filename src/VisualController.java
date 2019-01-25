@@ -12,8 +12,11 @@ import javax.swing.JPanel;
 import org.jnativehook.keyboard.NativeKeyEvent;
 import org.jnativehook.keyboard.NativeKeyListener;
 
+import joystick.JoystickListener;
+import net.java.games.input.Event;
+
 @SuppressWarnings("serial")
-public class ControllerListener extends JFrame implements NativeKeyListener {
+public class VisualController extends JFrame implements NativeKeyListener, JoystickListener {
            
     private JPanel contentPane;
     private BufferedImage overlay;
@@ -35,7 +38,7 @@ public class ControllerListener extends JFrame implements NativeKeyListener {
                 keyZL = NativeKeyEvent.VC_Q,
                 keyZR = NativeKeyEvent.VC_W;
     
-    public ControllerListener() throws IOException {
+    public VisualController() throws IOException {
         overlay = ImageIO.read(new File("resources/overlay.png"));
         pressA = ImageIO.read(new File("resources/A.png"));
         pressB = ImageIO.read(new File("resources/B.png"));
@@ -121,5 +124,10 @@ public class ControllerListener extends JFrame implements NativeKeyListener {
 
     @Override
     public void nativeKeyTyped(NativeKeyEvent e) {}
+
+    @Override
+    public void joystickMoved(Event e) {
+        System.out.println(e.getValue());        
+    }
 
 }

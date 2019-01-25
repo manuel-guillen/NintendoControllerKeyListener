@@ -5,6 +5,8 @@ import java.util.logging.Logger;
 import org.jnativehook.GlobalScreen;
 import org.jnativehook.NativeHookException;
 
+import joystick.NintendoJoystickEventDispatcher;
+
 public class Main {
 
     public static void main(String[] args) throws IOException {
@@ -18,7 +20,12 @@ public class Main {
             System.exit(1);
         }
         
-        GlobalScreen.addNativeKeyListener(new ControllerListener());
+        VisualController c = new VisualController();
+        GlobalScreen.addNativeKeyListener(c);
+        
+        NintendoJoystickEventDispatcher eventDispatcher = NintendoJoystickEventDispatcher.getInstance();
+        eventDispatcher.addJoystickListener(c);
+        new Thread(eventDispatcher).start();
     }
     
     private static void setGlobalScreenLogger(boolean value) {
